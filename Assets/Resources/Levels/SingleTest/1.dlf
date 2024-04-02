@@ -1,0 +1,14 @@
+-
+track(0,3291,-3,3,b,true,false,false);
+	lpos(0,0,i,1670,-3,s);
+	rpos(0,0,i,1670,3,i,3291,0,i);
+	tnote(1670,1);
+	tnote(3291,1);
+track(1670,3291,0,1.5,r,true,false,false);
+	lpos(1670,3,i);
+	rpos(1670,4.5,i);
+	tnote(3291,1);
+track(1670,3291,1.5,3,r,true,false,false);
+	lpos(1670,3,i);
+	rpos(1670,4.5,i);
+	tnote(3291,1);

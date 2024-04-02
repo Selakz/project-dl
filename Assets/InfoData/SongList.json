@@ -1,0 +1,20 @@
+{
+    "songs": [
+        {
+            "id": "RedRose",
+            "title": "Red Rose",
+            "composer": "yomoha",
+            "bpmDisplay": "190",
+            "description": "Demo test level",
+            "difficulties": [
+                {
+                    "class": 1,
+                    "chart": "Senolytics",
+                    "illust": "SARYN",
+                    "chartRate": 16,
+                    "ratingPlus": false
+                }
+            ]
+        }
+    ]
+}
