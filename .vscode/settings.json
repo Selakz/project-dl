@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Double Layer.sln"
+    "dotnet.defaultSolution": "project-dl.sln"
 }

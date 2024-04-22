@@ -9,11 +9,12 @@ public class ChartReader : MonoBehaviour
 
     static string[] heads = { "offset", "-", "unote", "pos", "speed", "track", "lpos", "rpos", "tnote", "thold" };
 
+    ChartInfo chartInfo = new();
     List<BaseNote> uNoteList = new();
     List<BaseNote> btNoteList = new();
     List<BaseNote> rtNoteList = new();
     List<BaseNote> dtNoteList = new();
-    Dictionary<char, List<BaseNote>> NoteList = new();
+    Dictionary<char, List<BaseNote>> noteList = new();
     List<Track> trackList = new();
     Volume volume = new();
     float offset = 0;
@@ -34,19 +35,19 @@ public class ChartReader : MonoBehaviour
         }
     }
 
-    public static (float offset, Volume volume, Dictionary<char, List<BaseNote>> NoteList, List<Track> trackList) Read(string levelPath, int difficulty, float speed)
+    public static ChartInfo Read(string levelPath, int difficulty, float speed)
     {
         return Instance.InClassRead(levelPath, difficulty, speed);
     }
 
-    (float offset, Volume volume, Dictionary<char, List<BaseNote>> NoteList, List<Track> trackList) InClassRead(string levelPath, int difficulty, float speed)
+    ChartInfo InClassRead(string levelPath, int difficulty, float speed)
     {
         string[] chart = File.ReadAllLines(levelPath + "/" + difficulty + ".dlf");
 
-        NoteList.Add('t', uNoteList);
-        NoteList.Add('b', btNoteList);
-        NoteList.Add('r', rtNoteList);
-        NoteList.Add('d', dtNoteList);
+        noteList.Add('t', uNoteList);
+        noteList.Add('b', btNoteList);
+        noteList.Add('r', rtNoteList);
+        noteList.Add('d', dtNoteList);
 
         for (ptr = 0; ptr < chart.Length; ptr++)
         {
@@ -67,7 +68,14 @@ public class ChartReader : MonoBehaviour
         dtNoteList.Sort(CmpTimeInNote);
         trackList.Sort(CmpTimeInTrack);
 
-        return (offset, volume, NoteList, trackList);
+        chartInfo = new()
+        {
+            offset = offset,
+            volume = volume,
+            noteList = noteList,
+            trackList = trackList
+        };
+        return chartInfo;
     }
 
     void HandleLine(string[] chart, string head, string line, float speed)
@@ -125,7 +133,7 @@ public class ChartReader : MonoBehaviour
             timeJudge = rTimeJudge,
             belongingTrack = rTrack.number,
         };
-        NoteList['t'].Add(rNote);
+        noteList['t'].Add(rNote);
         volume.AddNote(NoteType.UNote);
 
         rNote.speedList.Add((-timePreAnimation, 1));
@@ -301,7 +309,7 @@ public class ChartReader : MonoBehaviour
                     timeJudge = rTimeJudge,
                     belongingTrack = rTrack.number,
                 };
-                NoteList[rColor].Add(rNote);
+                noteList[rColor].Add(rNote);
                 volume.AddNote(rNoteType);
 
                 rNote.speedList.Add((rTimeStart, 1));
@@ -380,7 +388,7 @@ public class ChartReader : MonoBehaviour
                     belongingTrack = rTrack.number,
                     timeEnd = hold_rTimeEnd,
                 };
-                NoteList[rColor].Add(rHold);
+                noteList[rColor].Add(rHold);
                 volume.AddNote(rNoteType);
 
                 rHold.headSpeedList.Add((rTimeStart, 1));

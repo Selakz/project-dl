@@ -6,8 +6,10 @@ public class DestroyAfterAnimEnd : MonoBehaviour
 {
     // Serializable and Public
     [SerializeField] Animator anim;
+    [SerializeField] string stateName;  // !! Notice that this should be Layer.Name
 
     // Private
+    bool isDestroyActivated = false;
     AnimatorStateInfo asi;
 
     // Static
@@ -17,10 +19,14 @@ public class DestroyAfterAnimEnd : MonoBehaviour
     // System Function
     void Update()
     {
-        asi = anim.GetCurrentAnimatorStateInfo(0);
-        if (asi.normalizedTime >= 1)
+        if (!isDestroyActivated)
         {
-            Destroy(gameObject);
+            asi = anim.GetCurrentAnimatorStateInfo(0);
+            if (asi.IsName(stateName) && asi.normalizedTime >= 1)
+            {
+                isDestroyActivated = true;
+                Destroy(gameObject);
+            }
         }
     }
 }

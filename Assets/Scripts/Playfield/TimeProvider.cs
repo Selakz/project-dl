@@ -30,6 +30,7 @@ public class TimeProvider : MonoBehaviour
     public float audioDeviation = 0f;
 
     // Private
+    LevelInfo levelInfo;
     bool isPaused = false;
     float dspTimeStart = 0f;
     float offset = 0f;
@@ -40,9 +41,9 @@ public class TimeProvider : MonoBehaviour
     // Defined Function
     void TimeInit()
     {
-        audioSource.clip = infoReader.music;
+        audioSource.clip = levelInfo.music;
         audioSource.time = 0f;
-        audioDeviation = infoReader.musicSetting.audioDeviation;
+        audioDeviation = levelInfo.musicSetting.audioDeviation;
 
         _audioTime = 0f;
         dspTimeStart = (float)AudioSettings.dspTime + timePreAnimation + timeScheduled;
@@ -76,6 +77,9 @@ public class TimeProvider : MonoBehaviour
         EventManager.AddListener(EventManager.EventName.Pause, MusicPause);
         EventManager.AddListener(EventManager.EventName.Resume, MusicResume);
         EventManager.AddListener(EventManager.EventName.SetOffset, (object t) => { offset = (float)t; });
+
+        infoReader = GameObject.Find("InfoReader").GetComponent<InfoReader>();
+        levelInfo = infoReader.ReadInfo<LevelInfo>();
     }
 
     void Update()

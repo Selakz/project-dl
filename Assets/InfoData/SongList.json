@@ -1,20 +1,50 @@
 {
-    "songs": [
+  "songs": [
+    {
+      "idx": 0,
+      "id": "Default",
+      "title": {
+        "en": "Red Rose"
+      },
+      "composer": {
+        "en": "yomoha"
+      },
+      "bpmDisplay": "190",
+      "bpmDefault": 190,
+      "set": "base",
+      "description": {
+        "en": "Demo test level"
+      },
+      "difficulties": [
         {
-            "id": "RedRose",
-            "title": "Red Rose",
-            "composer": "yomoha",
-            "bpmDisplay": "190",
-            "description": "Demo test level",
-            "difficulties": [
-                {
-                    "class": 1,
-                    "chart": "Senolytics",
-                    "illust": "SARYN",
-                    "chartRate": 16,
-                    "ratingPlus": false
-                }
-            ]
+          "difficulty": 1,
+          "chart": "Senolytics",
+          "illust": "SARYN",
+          "rating": 4,
+          "ratingPlus": false
+        },
+        {
+          "difficulty": 2,
+          "chart": "Senolytics",
+          "illust": "SARYN",
+          "rating": 12,
+          "ratingPlus": false
+        },
+        {
+          "difficulty": 3,
+          "chart": "Senolytics",
+          "illust": "SARYN",
+          "rating": 15,
+          "ratingPlus": false
+        },
+        {
+          "difficulty": 4,
+          "chart": "Senolytics",
+          "illust": "SARYN",
+          "rating": 16,
+          "ratingPlus": false
         }
-    ]
+      ]
+    }
+  ]
 }
